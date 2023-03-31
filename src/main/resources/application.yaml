@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: demo
+  data:
+    mongodb:
+      database: demo
+      host: localhost
+      auto-index-creation: true
+      port: 27017
+
+
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include:
+          - prometheus
+          - health
+          - info
+          - metrics
+          - env
+          - shutdown
+          - startup
