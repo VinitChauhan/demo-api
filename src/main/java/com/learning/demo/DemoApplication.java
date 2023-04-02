@@ -10,10 +10,4 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-//	@Bean
-//	public MongoTemplate mongoTemplate(MongoDatabaseFactory databaseFactory, MappingMongoConverter converter) {
-//		converter.setTypeMapper(new DefaultMongoTypeMapper(null));
-//		return new MongoTemplate(databaseFactory, converter);
-//	}
-
 }
