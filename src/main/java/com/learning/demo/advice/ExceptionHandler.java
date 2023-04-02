@@ -18,7 +18,7 @@ public class ExceptionHandler {
     public Map<String, String> handleInvalidArgument(MethodArgumentNotValidException ex) {
         Map<String, String> errorMap = new HashMap<>();
         ex.getBindingResult().getFieldErrors()
-                .forEach(fieldError -> errorMap.put(fieldError.getField(),fieldError.getDefaultMessage()));
+                .forEach(fieldError -> errorMap.put(fieldError.getField(), fieldError.getDefaultMessage()));
         return errorMap;
     }
 
@@ -26,7 +26,7 @@ public class ExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(DuplicateLocationException.class)
     public Map<String, String> handleDuplicateLocation(DuplicateLocationException ex) {
         Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("errorMessage",ex.getMessage());
+        errorMap.put("errorMessage", ex.getMessage());
         return errorMap;
     }
 
@@ -34,7 +34,7 @@ public class ExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(LocationNotFoundException.class)
     public Map<String, String> handleLocationNotFound(LocationNotFoundException ex) {
         Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("errorMessage",ex.getMessage());
+        errorMap.put("errorMessage", ex.getMessage());
         return errorMap;
     }
 
