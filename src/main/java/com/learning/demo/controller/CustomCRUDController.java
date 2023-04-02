@@ -1,12 +1,14 @@
 package com.learning.demo.controller;
 
+import com.learning.demo.exceptions.DuplicateLocationException;
+import com.learning.demo.exceptions.LocationNotFoundException;
 import com.learning.demo.model.Location;
-import com.learning.demo.repositories.CustomCRUDRepository;
-import lombok.AllArgsConstructor;
+import com.learning.demo.service.LocationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -14,30 +16,32 @@ import java.util.List;
 @RequestMapping("/demo")
 public class CustomCRUDController {
     @Autowired
-    CustomCRUDRepository customCRUDRepository;
+    LocationService locationService;
+
     @GetMapping
     public List<Location> findAllLocation() {
-        return customCRUDRepository.findAll();
+        return locationService.findAll();
     }
+
     @PostMapping("/add")
-    public List<Location> addLocation(@RequestBody Location location) {
-        Location loc = customCRUDRepository.save(location);
+    public List<Location> addLocation(@RequestBody @Valid Location location) throws DuplicateLocationException {
+        Location loc = locationService.createLocation(location);
         log.info("Record Created :  {}", loc);
-        return customCRUDRepository.findAll();
+        return locationService.findAll();
     }
 
     @PutMapping("/update")
-    public List<Location> updateLocation(@RequestBody Location location){
-        Location loc = customCRUDRepository.save(location);
+    public List<Location> updateLocation(@RequestBody @Valid Location location) throws LocationNotFoundException {
+        Location loc = locationService.updateLocation(location);
         log.info("Record Updated :  {}", loc);
-        return customCRUDRepository.findAll();
+        return locationService.findAll();
     }
 
     @DeleteMapping("/delete/{id}")
-    public List<Location> deleteLocation(@PathVariable Integer id) {
-        customCRUDRepository.deleteById(id);
+    public List<Location> deleteLocation(@PathVariable Integer id) throws LocationNotFoundException {
+        locationService.deleteById(id);
         log.info("Record Deleted :  {}", id);
-        return customCRUDRepository.findAll();
+        return locationService.findAll();
     }
 
 }
