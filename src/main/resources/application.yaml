@@ -1,8 +1,10 @@
 server:
   port: 8081
+
 spring:
   application:
     name: demo
+
   data:
     mongodb:
       database: demo-api-db
@@ -10,6 +12,8 @@ spring:
       auto-index-creation: true
       port: 27017
 
+  devtools:
+    add-properties: true
 
 management:
   endpoints:
